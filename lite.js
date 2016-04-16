@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -23,8 +24,13 @@ module.exports = {
           presets: ['es2015'],
         },
       },
-    ]
+    ],
   },
+  plugins: [
+    new webpack.ProvidePlugin({
+      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+    }),
+  ],
 };
 
 if (!isProd) {
