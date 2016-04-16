@@ -1,0 +1,10 @@
+{
+  "name": "webpack-config",
+  "version": "0.1.0",
+  "description": "preset files of webpack.config.js",
+  "keywords": [
+    "webpack"
+  ],
+  "author": "Ching Lee <leeching.fx@gmail.com>",
+  "license": "MIT"
+}
