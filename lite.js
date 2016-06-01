@@ -51,3 +51,13 @@ module.exports = {
 if (!isProd) {
   module.exports.devtool = '#source-map';
 }
+
+
+if (isProd) {
+  module.exports.output.path = path.join(__dirname, 'dist');
+  module.exports.plugins.push(
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {warnings: false}
+    })
+  );
+}
