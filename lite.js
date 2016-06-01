@@ -13,6 +13,13 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'build'),
     filename: '[name].js',
+    library: 'LibName',
+    libraryTarget: 'umd',
+  },
+  resolve: {
+    alias: {
+      '#': path.join(__dirname, 'src'),
+    },
   },
   module: {
     loaders: [
@@ -23,6 +30,14 @@ module.exports = {
         query: {
           presets: ['es2015'],
         },
+      },
+      {
+        test: /\.less$/,
+        loader: 'style!css?sourceMap!less?sourceMap',
+      },
+      {
+        test: /\.html$/,
+        loader: 'html',
       },
     ],
   },
