@@ -1,0 +1,19 @@
+name: PROJECT_NAME
+script: index.js
+out_file: log/stdout.log
+error_file: log/error.log
+merge_logs: true
+watch:
+  - server
+  - client
+log_date_format: YYYY-MM-DD HH:mm:ss Z
+env:
+  NODE_ENV: development
+  PORT: 4000
+  IMAGE_CDN_ROOT: /assets/images,
+  ASSET_CDN_ROOT: /assets
+env_production:
+  NODE_ENV: production
+  PORT: 4000
+  IMAGE_CDN_ROOT: http://www.example.com/assets/images
+  ASSET_CDN_ROOT: http://www.example.com/assets

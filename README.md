@@ -1,3 +1,3 @@
-# webpack-config
+# project-config
 
-Preset files of webpack.config.js
+Config files of project
