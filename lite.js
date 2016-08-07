@@ -20,6 +20,9 @@ module.exports = {
     alias: {
       '#': path.join(__dirname, 'src'),
     },
+    extensions: [
+      '', '.webpack.js', '.web.js', '.js',
+    ],
   },
   module: {
     loaders: [
@@ -45,6 +48,11 @@ module.exports = {
     new webpack.ProvidePlugin({
       'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
     }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: Infinity,
+      filename: process.env.NODE_ENV === 'production' ? '[chunkhash].js' : '[name].js',
+    }),
   ],
 };
 
@@ -55,6 +63,7 @@ if (!isProd) {
 
 if (isProd) {
   module.exports.output.path = path.join(__dirname, 'dist');
+  module.exports.output.filename = '[chunkhash].js';
   module.exports.plugins.push(
     new webpack.optimize.UglifyJsPlugin({
       compress: {warnings: false}
