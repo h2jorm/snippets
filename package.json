@@ -1,9 +1,12 @@
 {
-  "name": "webpack-config",
+  "name": "blueprint",
   "version": "0.1.0",
-  "description": "preset files of webpack.config.js",
+  "private": true,
+  "description": "frequently used modules, configs and so on",
   "keywords": [
-    "webpack"
+    "webpack",
+    "pm2",
+    "angular2"
   ],
   "author": "Ching Lee <leeching.fx@gmail.com>",
   "license": "MIT"

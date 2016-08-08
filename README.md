@@ -1,3 +1,3 @@
-# project-config
+# Blueprint
 
-Config files of project
+Frequently used modules, configs and so on.
