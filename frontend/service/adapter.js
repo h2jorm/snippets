@@ -15,11 +15,9 @@ export function camelize(obj) {
   if (obj === null)
     return null;
   if (typeof obj === 'object' && !Array.isArray(obj)) {
-    const ret = {};
-    for (let attr in obj) {
-      ret[camelcase(attr)] = camelize(obj[attr]);
-    }
-    return ret;
+    return Object.keys(obj).reduce((ret, attr) => Object.assign(ret, {
+      [camelcase(attr)]: camelize(obj[attr])
+    }), {});
   }
   return obj;
 }
@@ -33,11 +31,9 @@ export function snakelize(obj) {
   if (obj === null)
     return null;
   if (typeof obj === 'object' && !Array.isArray(obj)) {
-    const ret = {};
-    for (let attr in obj) {
-      ret[snakecase(attr)] = snakelize(obj[attr]);
-    }
-    return ret;
+    return Object.keys(obj).reduce((ret, attr) => Object.assign(ret, {
+      [snakecase(attr)]: snakelize(obj[attr])
+    }), {});
   }
   return obj;
 }
