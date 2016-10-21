@@ -1,21 +1,32 @@
-import {UNAUTHORIZED} from '#/service';
-
 /**
  * parse response
  * @module service/parseRes
  */
 export function parseRes(res) {
-  const {status} = res;
-  switch (status) {
+  switch (res.status) {
     case 200:
     case 201:
       return res.json();
+    case 204:
+      return Promise.resolve({});
+    case 403:
+      return Promise.reject({
+        errors: 'broken token',
+      });
+    case 409:
+      return Promise.reject({
+        errors: 'invalid token',
+      });
     default:
-      const error = new Error(`invalid response status: ${status}`);
-      return res.json().
-        then(resData => {
-          error.resData = resData;
-          return Promise.reject(error);
+      return new Promise((resolve, reject) => {
+        res.json().then(json => {
+          reject(json);
+        })
+        .catch(err => {
+          reject({
+            errors: 'invalid json',
+          });
         });
+      });
   }
 }
