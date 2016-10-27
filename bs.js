@@ -22,7 +22,10 @@ compiler.plugin('done', function (stats) {
 bs.init({
   open: false,
   middleware: [
-    webpackDevMiddleware(compiler),
+    webpackDevMiddleware(compiler, {
+      publicPath: webpackConfig.output.publicPath,
+      noInfo: true,
+    }),
     proxy({
       target: PROXY_TARGET,
       changeOrigin: true,
