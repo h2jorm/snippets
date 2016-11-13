@@ -51,7 +51,7 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: Infinity,
-      filename: process.env.NODE_ENV === 'production' ? '[chunkhash].js' : '[name].js',
+      filename: isProd ? '[chunkhash].js' : '[name].js',
     }),
   ],
 };
