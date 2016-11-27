@@ -4,9 +4,25 @@ import path = require('path');
 
 const [stdoutStream, errorStream] = ['stdout', 'error']
 .map(name => {
-  return fs.createWriteStream(path.resolve(`log/${name}.log`));
+  return fs.createWriteStream(path.resolve(`log/${name}.log`), {
+    flags: 'a',
+  });
 });
 
-const logger = new Console(stdoutStream, errorStream);
+class Logger extends Console {
+  prefix(message: string) {
+    return `[${new Date().toISOString()}] ${message}`;
+  }
+
+  log(message: string) {
+    super.log(this.prefix(message));
+  }
+
+  error(message: string) {
+    super.log(this.prefix(message));
+  }
+}
+
+const logger = new Logger(stdoutStream, errorStream);
 
 export default logger;
