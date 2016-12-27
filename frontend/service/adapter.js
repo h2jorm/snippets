@@ -19,6 +19,9 @@ export function camelize(obj) {
       [camelcase(attr)]: camelize(obj[attr])
     }), {});
   }
+  if (Array.isArray(obj)) {
+    obj = obj.map(o => camelize(o));
+  }
   return obj;
 }
 
@@ -34,6 +37,9 @@ export function snakelize(obj) {
     return Object.keys(obj).reduce((ret, attr) => Object.assign(ret, {
       [snakecase(attr)]: snakelize(obj[attr])
     }), {});
+  }
+  if (Array.isArray(obj)) {
+    obj = obj.map(o => snakelize(o));
   }
   return obj;
 }
