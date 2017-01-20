@@ -1,6 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
+const ManifestPlugin = require('webpack-manifest-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -35,6 +37,14 @@ module.exports = {
           presets: ['es2015'],
         },
       },
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract(['css', 'postcss', 'sass']),
+      },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract(['css', 'postcss']),
+      },
     ],
   },
   postcss: [
@@ -47,6 +57,12 @@ module.exports = {
     new webpack.ProvidePlugin({
       'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
     }),
+    new ManifestPlugin(),
+    new ExtractTextPlugin(isProd ? '[contenthash].css' : '[name].css'),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
+      'process.env.isBrowser': true,
+    }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
@@ -58,24 +74,11 @@ module.exports = {
 
 if (!isProd) {
   module.exports.devtool = '#source-map';
-  module.exports.module.loaders.push(
-    {
-      test: /\.scss$/,
-      loader: 'style!css?sourceMap!postcss!sass?sourceMap',
-    }
-  );
 }
-
 
 if (isProd) {
   module.exports.output.path = path.join(__dirname, 'dist');
   module.exports.output.filename = '[chunkhash].js';
-  module.exports.module.loaders.push(
-    {
-      test: /\.scss$/,
-      loader: 'style!css!postcss!sass',
-    }
-  );
   module.exports.plugins.push(
     new webpack.optimize.UglifyJsPlugin({
       compress: {warnings: false}
