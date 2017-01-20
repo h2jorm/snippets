@@ -12,18 +12,19 @@ import snakecase from 'lodash.snakecase';
  * @return {Object} obj - a new camelcase object
  */
 export function camelize(obj) {
-  if (obj === null)
+  if (obj === null) {
     return null;
+  }
   if (typeof obj === 'object' && !Array.isArray(obj)) {
-    return Object.keys(obj).reduce((ret, attr) => Object.assign(ret, {
-      [camelcase(attr)]: camelize(obj[attr])
-    }), {});
+    const ret = {};
+    Object.keys(obj).forEach((attr) => {
+      ret[camelcase(attr)] = camelize(obj[attr]);
+    });
+    return ret;
   }
-  if (Array.isArray(obj)) {
-    obj = obj.map(o => camelize(o));
-  }
-  return obj;
+  return Array.isArray(obj) ? obj.map(o => camelize(o)) : obj;
 }
+
 
 /**
  * camelcase -> snakecase
@@ -31,15 +32,15 @@ export function camelize(obj) {
  * @return {Object} obj - a new snakecase object
  */
 export function snakelize(obj) {
-  if (obj === null)
+  if (obj === null) {
     return null;
+  }
   if (typeof obj === 'object' && !Array.isArray(obj)) {
-    return Object.keys(obj).reduce((ret, attr) => Object.assign(ret, {
-      [snakecase(attr)]: snakelize(obj[attr])
-    }), {});
+    const ret = {};
+    Object.keys(obj).forEach((attr) => {
+      ret[snakecase(attr)] = snakelize(obj[attr]);
+    });
+    return ret;
   }
-  if (Array.isArray(obj)) {
-    obj = obj.map(o => snakelize(o));
-  }
-  return obj;
+  return Array.isArray(obj) ? obj.map(o => snakelize(o)) : obj;
 }
