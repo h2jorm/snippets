@@ -1,0 +1,20 @@
+.carousel-container {
+  position: relative;
+  overflow-x: hidden;
+  max-height: 540px;
+}
+
+.carousel-slider {
+  display: flex;
+  position: absolute;
+  height: 100%;
+  left: 0;
+}
+
+.carousel-slide {
+  display: block;
+  height: 100%;
+  background-color: #ccc;
+  background-size: cover;
+  background-position: center;
+}
