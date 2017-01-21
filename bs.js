@@ -27,6 +27,10 @@ bs.init({
       .on('end', next);
     },
   ],
+  serveStatic: [{
+    route: '/public',
+    dir: 'public',
+  }],
   files: [
     'index.html',
   ],
