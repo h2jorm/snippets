@@ -1,17 +1,21 @@
 // reference: https://github.com/Browsersync/recipes/tree/master/recipes/webpack.babel
 
-const fs = require('fs');
 const bs = require('browser-sync').create();
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
+const proxy = require('http-proxy-middleware');
+const PROXY_TARGET = process.argv[2];
+if (!PROXY_TARGET) {
+  console.error('invalid proxy target. Use like `node bs.js http://127.0.0.1:4000`');
+  process.exit(1);
+}
 
 const webpackConfig = require('./webpack.config');
 const compiler = webpack(webpackConfig);
 
 compiler.plugin('done', function (stats) {
-  if (stats.hasErrors() || stats.hasWarnings()) {
+  if (stats.hasErrors() || stats.hasWarnings())
     return;
-  }
   bs.reload();
 });
 
@@ -22,12 +26,9 @@ bs.init({
       publicPath: webpackConfig.output.publicPath,
       noInfo: true,
     }),
-    function fallback(req, res, next) {
-      fs.createReadStream('./index.html').pipe(res)
-      .on('end', next);
-    },
-  ],
-  files: [
-    'index.html',
+    proxy({
+      target: PROXY_TARGET,
+      changeOrigin: true,
+    }),
   ],
 });
