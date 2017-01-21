@@ -9,22 +9,25 @@
 <div class="container">
   <h1>Snippets</h1>
   <section>
-    <div id="carousel"></div>
-    <button id="carousel-nav-prev"><</button>
-    <button id="carousel-nav-next">></button>
+    <h2>Carousel</h2>
+    <div class="carousel" id="carousel">
+      <svg data-nav="prev" width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title>prev</title><path d="M10.568 14.871L20.702 4.738a.95.95 0 0 1 1.348-.006.951.951 0 0 1-.006 1.348l-9.646 9.646 9.61 9.61c.374.374.38.975.006 1.348a.95.95 0 0 1-1.348-.006l-10.3-10.3a.951.951 0 0 1 .202-1.507z" fill="#FFF" fill-rule="evenodd"/></svg>
+      <svg data-nav="next" width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title>next</title><path d="M21.876 14.871L11.743 4.738a.95.95 0 0 0-1.348-.006.951.951 0 0 0 .006 1.348l9.645 9.646-9.61 9.61a.951.951 0 0 0-.006 1.348.95.95 0 0 0 1.348-.006l10.301-10.3a.951.951 0 0 0-.203-1.507z" fill="#FFF" fill-rule="evenodd"/></svg>
+    </div>
   </section>
   <section>
-    <div id="gallery">
+    <h2>Gallery</h2>
+    <div class="gallery" id="gallery">
       <div>
-        <img src="public/images/1.svg" alt="1.svg">
-        <img src="public/images/2.svg" alt="2.svg">
-        <img src="public/images/3.svg" alt="3.svg">
-        <img src="public/images/4.svg" alt="4.svg">
-        <img src="public/images/5.svg" alt="5.svg">
+        <div style="background-image: url('public/images/1.svg')"></div>
+        <div style="background-image: url('public/images/2.svg')"></div>
+        <div style="background-image: url('public/images/3.svg')"></div>
+        <div style="background-image: url('public/images/4.svg')"></div>
+        <div style="background-image: url('public/images/5.svg')"></div>
       </div>
+      <svg data-nav="prev" width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title>prev</title><path d="M10.568 14.871L20.702 4.738a.95.95 0 0 1 1.348-.006.951.951 0 0 1-.006 1.348l-9.646 9.646 9.61 9.61c.374.374.38.975.006 1.348a.95.95 0 0 1-1.348-.006l-10.3-10.3a.951.951 0 0 1 .202-1.507z" fill="#FFF" fill-rule="evenodd"/></svg>
+      <svg data-nav="next" width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title>next</title><path d="M21.876 14.871L11.743 4.738a.95.95 0 0 0-1.348-.006.951.951 0 0 0 .006 1.348l9.645 9.646-9.61 9.61a.951.951 0 0 0-.006 1.348.95.95 0 0 0 1.348-.006l10.301-10.3a.951.951 0 0 0-.203-1.507z" fill="#FFF" fill-rule="evenodd"/></svg>
     </div>
-    <button id="gallery-nav-prev"><</button>
-    <button id="gallery-nav-next">></button>
   </section>
 </div>
 <script src="./assets/vendor.js"></script>

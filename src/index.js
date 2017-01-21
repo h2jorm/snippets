@@ -9,6 +9,7 @@ const slides = [...Array(5).keys()].map(index => ({
 }));
 
 const carousel = new Carousel({
+  height: '400px',
   slides,
 });
 
@@ -19,12 +20,12 @@ const gallery = new Gallery({
 });
 
 ['prev', 'next'].map(direction => {
-  document.querySelector(`#carousel-nav-${direction}`)
+  document.querySelector(`#carousel [data-nav=${direction}]`)
   .addEventListener('click', e => {
     e.preventDefault();
     carousel[direction]();
   });
-  document.querySelector(`#gallery-nav-${direction}`)
+  document.querySelector(`#gallery [data-nav=${direction}]`)
   .addEventListener('click', e => {
     e.preventDefault();
     gallery[direction]();

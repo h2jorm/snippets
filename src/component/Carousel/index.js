@@ -1,4 +1,19 @@
-const prefix = s => ['carousel', s].join('-');
+class Element {
+  constructor(tagName) {
+    this._element = document.createElement(tagName);
+  }
+
+  get element() {
+    return this._element;
+  }
+
+  addStyles(styles) {
+    Object.keys(styles).forEach(property => {
+      this._element.style[property] = styles[property];
+    });
+    return this;
+  }
+}
 
 class Slide {
   constructor({url, image}) {
@@ -8,12 +23,17 @@ class Slide {
   }
 
   init() {
-    const container = document.createElement('a');
-    container.href = this.url;
-    container.className = prefix('slide');
-    container.style.backgroundImage = `url("${this.image}")`;
-    container.target = '_blank';
-    return container;
+    const container = new Element('a');
+    container.element.href = this.url;
+    container.element.target = '_blank';
+    return container.addStyles({
+      display: 'block',
+      height: '100%',
+      backgroundColor: '#ccc',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundImage: `url("${this.image}")`,
+    }).element;
   }
 }
 
@@ -25,9 +45,13 @@ export default class Carousel {
     this.interval = interval;
     this.callback = callback;
 
-    const slider = this.slider = document.createElement('div');
-    slider.className = prefix('slider');
-    slider.style.width = 100 * slides.length + '%';
+    const slider = this.slider = new Element('div').addStyles({
+      display: 'flex',
+      width: `${100 * slides.length}%`,
+      height: '100%',
+      position: 'absolute',
+      left: 0,
+    }).element;
     this.slides = slides.map((s, index) => {
       const slide = new Slide(s);
       slide.element.style.width = 100 / slides.length + '%';
@@ -36,10 +60,14 @@ export default class Carousel {
       return slide;
     });
 
-    const element = this.element = document.createElement('div');
-    element.className = prefix('container');
-    element.style.height = height;
-    element.appendChild(slider);
+    this.element = new Element('div')
+    .addStyles({
+      position: 'relative',
+      overflowX: 'hidden',
+      height,
+    })
+    .element;
+    this.element.appendChild(slider);
 
     this.sliding = false;
   }
