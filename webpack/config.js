@@ -14,7 +14,8 @@ module.exports = {
     bundle: './src/index.js',
   },
   output: {
-    path: path.join(__dirname, 'build'),
+    path: '/',
+    publicPath: '/assets',
     filename: '[name].js',
     library: 'LibName',
     libraryTarget: 'umd',
@@ -34,7 +35,7 @@ module.exports = {
         loader: 'babel',
         exclude: /node_modules/,
         query: {
-          presets: ['es2015'],
+          presets: ['es2015', 'stage-2'],
         },
       },
       {
