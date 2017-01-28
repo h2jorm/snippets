@@ -60,7 +60,7 @@ module.exports = {
     new ManifestPlugin(),
     new ExtractTextPlugin(isProd ? '[contenthash].css' : '[name].css'),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       'process.env.isBrowser': true,
     }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
