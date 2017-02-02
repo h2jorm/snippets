@@ -8,7 +8,7 @@ FILES = Message main
 OBJECTS = $(patsubst %,$(ODIR)/%.o,$(FILES))
 
 build: $(OBJECTS)
-	$(CXX) $(CPPFLAGS) -o $(EXEC) $(OBJECTS)
+	$(CXX) $(CPPFLAGS) -o $(EXEC) $^
 
 $(OBJECTS): $(ODIR)/%.o: $(SDIR)/%.cpp
 	$(CXX) $(CPPFLAGS) -o $@ -c $^
