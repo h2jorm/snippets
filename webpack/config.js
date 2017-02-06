@@ -24,45 +24,41 @@ module.exports = {
     alias: {
       '#': path.join(__dirname, 'src'),
     },
-    extensions: [
-      '', '.webpack.js', '.web.js', '.js',
-    ],
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
-        loader: 'babel',
+        loader: 'babel-loader',
         exclude: /node_modules/,
-        query: {
+        options: {
           presets: ['es2015', 'stage-2'],
         },
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract(['css', 'postcss', 'sass']),
+        loader: ExtractTextPlugin.extract({
+          use: ['css-loader', 'postcss-loader', 'sass-loader'],
+        }),
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract(['css', 'postcss']),
+        loader: ExtractTextPlugin.extract({
+          use: ['css-loader', 'postcss-loader'],
+        }),
       },
     ],
   },
-  postcss: [
-    autoprefixer({
-      browsers: ['last 2 versions'],
-    }),
-  ],
   plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.ProvidePlugin({
       'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
     }),
     new ManifestPlugin(),
-    new ExtractTextPlugin(isProd ? '[contenthash].css' : '[name].css'),
+    new ExtractTextPlugin({
+      filename: isProd ? '[contenthash].css' : '[name].css',
+    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-      'process.env.isBrowser': true,
     }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new webpack.optimize.CommonsChunkPlugin({
@@ -70,6 +66,15 @@ module.exports = {
       minChunks: Infinity,
       filename: isProd ? '[chunkhash].js' : '[name].js',
     }),
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: [
+          autoprefixer({
+            browsers: ['last 2 versions'],
+          }),
+        ],
+      },
+    })
   ],
 };
 
@@ -81,8 +86,6 @@ if (isProd) {
   module.exports.output.path = path.join(__dirname, 'dist');
   module.exports.output.filename = '[chunkhash].js';
   module.exports.plugins.push(
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {warnings: false}
-    })
+    new webpack.optimize.UglifyJsPlugin()
   );
 }
