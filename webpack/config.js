@@ -24,6 +24,9 @@ module.exports = {
     alias: {
       '#': path.join(__dirname, 'src'),
     },
+    extensions: [
+      '.js', '.json', '.sass'
+    ],
   },
   module: {
     rules: [
@@ -36,7 +39,7 @@ module.exports = {
         },
       },
       {
-        test: /\.scss$/,
+        test: /\.sass$/,
         loader: ExtractTextPlugin.extract({
           use: ['css-loader', 'postcss-loader', 'sass-loader'],
         }),
