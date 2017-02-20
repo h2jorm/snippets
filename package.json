@@ -1,16 +1,11 @@
 {
-  "name": "blueprint",
+  "name": "snippets",
   "version": "0.1.0",
   "private": true,
   "description": "frequently used modules, configs and so on",
   "scripts": {
     "dev": "node bs.js"
   },
-  "keywords": [
-    "webpack",
-    "pm2",
-    "angular2"
-  ],
   "author": "Ching Lee <leeching.fx@gmail.com>",
   "license": "MIT",
   "dependencies": {

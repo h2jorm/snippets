@@ -24,7 +24,7 @@ module.exports = {
       '#': path.join(__dirname, 'src'),
     },
     extensions: [
-      '', '.webpack.js', '.web.js', '.js', '.scss'
+      '', '.webpack.js', '.web.js', '.js', '.sass'
     ],
   },
   module: {
@@ -38,7 +38,7 @@ module.exports = {
         },
       },
       {
-        test: /\.scss$/,
+        test: /\.sass$/,
         loader: ExtractTextPlugin.extract(['css', 'postcss', 'sass']),
       },
       {
