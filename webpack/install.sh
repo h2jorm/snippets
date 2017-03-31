@@ -22,7 +22,7 @@ do_yarn(){
   imports-loader \
   exports-loader \
   whatwg-fetch \
-  extract-text-webpack-plugin@beta \
+  extract-text-webpack-plugin \
   webpack-manifest-plugin \
   browser-sync \
   webpack-dev-middleware
