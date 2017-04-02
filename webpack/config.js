@@ -41,6 +41,18 @@ const rules = [
       ]
     }),
   },
+  {
+    test: /\.(jpg|jpeg|png|gif)$/,
+    loader: 'url-loader',
+    options: {
+      limit: 1000,
+      name: 'images/[name]-[hash:6].[ext]'
+    },
+  },
+  {
+    test: /\.svg$/,
+    loader: 'svg-sprite-loader',
+  },
 ];
 
 const plugins = [
@@ -73,7 +85,7 @@ const plugins = [
 
 if (isProd) {
   outputPath = path.join(__dirname, 'dist');
-  filename = 'name-[chunkhash:8].js';
+  filename = 'name-[chunkhash:6].js';
   plugins.push(
     new webpack.optimize.UglifyJsPlugin()
   );

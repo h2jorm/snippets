@@ -19,6 +19,9 @@ do_yarn(){
   postcss-loader \
   css-loader \
   autoprefixer \
+  url-loader \
+  file-loader \
+  svg-sprite-loader \
   imports-loader \
   exports-loader \
   whatwg-fetch \
